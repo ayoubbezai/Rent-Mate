@@ -71,6 +71,19 @@ $fields['user_id'] = Auth::id();
     public function show(string $id)
     {
         //
+         $property = Properties::find($id);
+        if(!$property){
+            return response()->json([
+                "success" => false,
+                "data" => null,
+                "message" =>"property not found"
+            ],404);
+        }
+        return response()->json([
+            "success" => true,
+            "data" => $property,
+                
+        ]);
     }
 
     /**
@@ -79,6 +92,32 @@ $fields['user_id'] = Auth::id();
     public function update(Request $request, string $id)
     {
         //
+            $property = Properties::find($id);
+        $fields = $request->validate([
+        'type' => 'required|string|max:255',
+        'title' => 'required|string|max:255',
+        'description' => 'nullable|string',
+        'status' => 'required|string|in:available,sold,rented', // Example statuses
+        'location' => 'required|string|max:255',
+        'price' => 'required|numeric|min:0',
+        'start_date' => 'required|date|after_or_equal:today',
+        'end_date' => 'required|date|after:start date',
+    ]);
+
+     if(!$property){
+            return response()->json([
+                "success" => false,
+                "data" => null,
+                "message" =>"property not found"
+            ],404);
+        }
+        return response()->json([
+            "success" => true,
+            "data" => $property,
+                
+        ]);
+
+
     }
 
     /**
@@ -87,5 +126,15 @@ $fields['user_id'] = Auth::id();
     public function destroy(string $id)
     {
         //
+        $property = Properties::find($id);
+        if(!$property){
+            return response()->json([
+                "success" => false,
+                "data" => null,
+                "message" =>"property not found"
+            ],404);
+        }
+         $property->delete();
+        return response(status:204);
     }
 }

@@ -9,7 +9,7 @@ class Properties extends Model
         protected $table = 'properties';
           protected $fillable = [
         'type', 'title', 'description', 'status', 'location',
-        'price', 'start date', 'end date', 'user_id'
+        'price', 'start_date', 'end_date', 'user_id'
     ];
 
     public function user()
