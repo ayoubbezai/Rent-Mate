@@ -36,7 +36,7 @@ class PropertyController extends Controller
             }
                         $data->orderBy($orderBy,$orderDirection);
         }
-
+        
         return response()->json($data->paginate($perPage));
 
     }

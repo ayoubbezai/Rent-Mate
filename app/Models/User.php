@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Role;
 use App\Models\Properties;
+use App\Models\Requests;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -64,4 +65,13 @@ class User extends Authenticatable
 {
     return $this->hasMany(Properties::class);
 }
+    public function requests()
+    {
+        return $this->hasMany(Requests::class, 'user_id');
+    }
+
+    public function landlordRequests()
+    {
+        return $this->hasMany(Requests::class, 'landlord_id');
+    }
 }

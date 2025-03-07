@@ -63,7 +63,7 @@ $user = User::where("email", $data["email"])->first();
             return response(["success" => false, "message" => "Invalid credentials"], 401);
     }
             $token = $user->createToken("auth_token")->plainTextToken;
-            $role_name = $user->role->name;
+            $user->role->name;
              return response()->json(["user" => $user, "token" => $token]);
 
 
