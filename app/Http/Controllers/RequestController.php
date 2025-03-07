@@ -86,6 +86,9 @@ class RequestController extends Controller
                 "message" =>"request not found"
             ],404);
         }
+
+        $request->user;
+        $request->landlord;
          return response()->json([
             "success" => true,
             "data" => $request,
@@ -118,7 +121,7 @@ class RequestController extends Controller
         $request2->update($fields);
          return response()->json([
             "success" => true,
-            "data" => $request,
+            "data" => $request2,
                 
         ]);
 
